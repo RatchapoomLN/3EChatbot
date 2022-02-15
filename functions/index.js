@@ -30,20 +30,21 @@ exports.webhook = functions
     const UUID = req.body.originalDetectIntentRequest.payload.data.source.userId;
     //[2] ประกาศ ตัวแปร agent
     const agent = new WebhookClient({ request: req, response: res });
-
+//Register สมัครสมาชิก
     const cityRef = db.collection('Member').doc(UUID);
     const doc = await cityRef.get();
       if (!doc.exists) {
        console.log('No such document!');
        const data = {
         Id : UUID,
-        Coin : '0'
+        Coin : Number(0)
       };
       // Add a new document in collection "cities" with ID 'LA'
       const res = await db.collection('Member').doc(UUID).set(data);
       } else {
        console.log('Document data:', doc.data());
       }
+//Register สมัครสมาชิก //End
 
     //[4] ทำ function view menu เพื่อแสดงผลบางอย่างกลับไปที่หน้าจอของ bot
     const viewMenu = async agent => {
