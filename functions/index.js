@@ -31,6 +31,20 @@ exports.webhook = functions
     //[2] ประกาศ ตัวแปร agent
     const agent = new WebhookClient({ request: req, response: res });
 
+    const cityRef = db.collection('Member').doc(UUID);
+    const doc = await cityRef.get();
+      if (!doc.exists) {
+       console.log('No such document!');
+       const data = {
+        Id : UUID,
+        Coin : '0'
+      };
+      // Add a new document in collection "cities" with ID 'LA'
+      const res = await db.collection('Member').doc(UUID).set(data);
+      } else {
+       console.log('Document data:', doc.data());
+      }
+
     //[4] ทำ function view menu เพื่อแสดงผลบางอย่างกลับไปที่หน้าจอของ bot
     const viewMenu = async agent => {
     //[5] เพิ่ม flex message
