@@ -35,6 +35,8 @@ exports.webhook = functions
     const viewMenu = async agent => {
     //[5] เพิ่ม flex message
       //[9] แก้ไข flex message ให้ dynamic ได้
+      return db
+        .collection("Member").doc(UUID).get().then(snapshot => {
       let flexMenuMsg = {
         type: "flex",
         altText: "Flex Message",
@@ -55,8 +57,7 @@ exports.webhook = functions
           },
           hero: {
             type: "image",
-            url:
-              "https://scdn.line-apps.com/n/channel_devcenter/img/fx/linecorp_code_withborder.png",
+            url:"https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl="+snapshot.data().Id,
             size: "xl",
             aspectMode: "cover"
           },
@@ -81,6 +82,7 @@ exports.webhook = functions
           }
         }
       };
+    
 
 
       //[6] ปรับการตอบกลับ ให้ตอบกลับผ่าน flex message ด้วย Payload
@@ -138,6 +140,7 @@ exports.webhook = functions
           });
           return agent.add(payloadMsg);
         })
+      })
           .catch(error => {
             return response.status(500).send({
               error: error
@@ -166,6 +169,7 @@ exports.webhook = functions
     // //ยิงข้อความกลับไปหา LINE (ส่ง response กลับไปหา LINE)
     // return lineReply(replyToken, messages);
   });
+
 
 //function สำหรับ reply กลับไปหา LINE โดยต้องการ reply token และ messages (array)
 const lineReply = (replyToken, messages) => {
