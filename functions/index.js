@@ -31,7 +31,7 @@ exports.webhook = functions
     //[2] ประกาศ ตัวแปร agent
     const agent = new WebhookClient({ request: req, response: res });
 //Register สมัครสมาชิก
-    const cityRef = db.collection('Member').doc(UUID);
+      const cityRef = db.collection('Member').doc(UUID);
     const doc = await cityRef.get();
       if (!doc.exists) {
        console.log('No such document!');
@@ -46,10 +46,10 @@ exports.webhook = functions
       }
 //Register สมัครสมาชิก //End
 
-    //[4] ทำ function view menu เพื่อแสดงผลบางอย่างกลับไปที่หน้าจอของ bot
+//[4] ทำ function view menu เพื่อแสดงผลบางอย่างกลับไปที่หน้าจอของ bot
     const viewMenu = async agent => {
-    //[5] เพิ่ม flex message
-      //[9] แก้ไข flex message ให้ dynamic ได้
+//[5] เพิ่ม flex message
+//[9] แก้ไข flex message ให้ dynamic ได้
       return db
         .collection("Member").doc(UUID).get().then(snapshot => {
       let flexMenuMsg = {
@@ -97,34 +97,8 @@ exports.webhook = functions
           }
         }
       };
-    
 
-
-      //[6] ปรับการตอบกลับ ให้ตอบกลับผ่าน flex message ด้วย Payload
-      /* return db
-        .collection("Member").get().then(snapshot => {snapshot.docs.forEach(doc => {const data = doc.data();
-        let itemData = {
-          type: "box",
-          layout: "baseline",
-          spacing : "sm",
-          contents: [
-            {
-              type: "text",
-              text: data.Id,
-              size: "xxs",
-              wrap: true,
-            },
-            {
-              type: "text",
-              text: data.Coin + " Coin",
-              size: "sm",
-              align: "end",
-              color: "#AAAAAA"
-            }
-          ]
-        };
-        flexMenuMsg.contents.body.contents[1].contents.push(itemData);
-      }); */
+//[6] ปรับการตอบกลับ ให้ตอบกลับผ่าน flex message ด้วย Payload
 
       return db
         .collection("Member").doc(UUID).get().then(snapshot => {
@@ -162,29 +136,16 @@ exports.webhook = functions
             });
           });
         };
-
     //[3] ทำ intent map เข้ากับ function
     let intentMap = new Map();
     intentMap.set("My-Bag", viewMenu);
+
     agent.handleRequest(intentMap);
-
-    //[0] ดึงข้อมูลจาก request message ที่มาจาก LINE
-    //const replyToken = req.body.events[0].replyToken;
-    // const messages = [
-    //   {
-    //     type: "text",
-    //     text: req.body.events[0].message.text //ดึง message ที่ส่งเข้ามา
-    //   },
-    //   {
-    //     type: "text",
-    //     text: JSON.stringify(req.body) //ลองให้พ่น สิ่งที่่ LINE ส่งมาให้ทั้งหมดออกมาดู
-    //   }
-    // ];
-
-    // //ยิงข้อความกลับไปหา LINE (ส่ง response กลับไปหา LINE)
-    // return lineReply(replyToken, messages);
   });
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //function สำหรับ reply กลับไปหา LINE โดยต้องการ reply token และ messages (array)
 const lineReply = (replyToken, messages) => {
