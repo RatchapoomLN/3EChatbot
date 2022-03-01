@@ -1,8 +1,8 @@
 {
-    "lineMessagingApi" : "https://api.line.me/v2/bot/message",
+    "lineMessagingApi" : "https://api.line.me/v2/bot",
     "lineHeaders":{
             "Content-Type":"application/json",
             "Authorzation":"Bearer zgVGiHj9jEbJhPrlqp8N17kTb7QKgnjruqiUNSX3hMazgKe0LhWMKp0CLayR4eWva8OIe5T+vOrwaK3R1Lfyx4CG6k63zwvCHK28GfcQYw9msAO9xaSN9Qj4EsJ4k6wg6pT2Q8VqPfjlnTn9o9WTugdB04t89/1O/w1cDnyilFU="
     },
     "databaseURL":"https://e-coin-64820.firebaseio.com"
-}
+} 
