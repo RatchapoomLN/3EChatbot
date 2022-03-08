@@ -172,7 +172,7 @@ console.log(doc.data().pass);///////////////เช็คค่า pass ว่า
 console.log("เทส",num);////////////////////เทสค่า number ที่รับเข้ามา
   if(doc.data().Coin >=num){///////////////ตรวจสอบว่าเหรียญเรามีพอกับเหรียญที่ต้องการโอนหรือไม่ ถ้าพอ
       console.log("จำนวนนี้ใช้ได้",num);/////////////// พอที่จะโอน
-      db.collection("Member").doc(UUID).update({givecoin : Number(num),pass : "T"})
+      await db.collection("Member").doc(UUID).update({givecoin : Number(num),pass : "T"})
       return db.collection("Member").doc(UUID).get().then(snapshot => {
       let flexcoin ={
           "type": "flex",
